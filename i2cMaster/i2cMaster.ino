@@ -43,8 +43,9 @@ void loop() {
   //Master wants to get bytes from a slave
   uint8_t countBytesMustBe = 2;
   byte* bytesFromSlave = requestBytesFromSlave(addressSlave0, countBytesMustBe);
-  Serial.println(*bytesFromSlave, BIN);
-  Serial.println(*(++bytesFromSlave), BIN);
+  byte dbg = *bytesFromSlave;
+  //Serial.println(dbg, BIN);
+ // Serial.println(dbg[1], BIN);
   delay(2000);
 
 
@@ -56,11 +57,15 @@ byte* requestBytesFromSlave(uint8_t addressSlave, uint8_t countBytesMustBe){
   countBytesReceived = Wire.requestFrom(addressSlave, countBytesMustBe);
   byte dataBytes[countBytesReceived];
   
+  Serial.println("----------");
+  
   //if we get required quantity of bytes
   if(countBytesReceived == countBytesMustBe){
     uint8_t i =0;
     while(Wire.available()){
-      dataBytes[i++] = Wire.read(); //read 1 byte
+      dataBytes[i] = Wire.read(); //read 1 byte
+      Serial.println(dataBytes[i], BIN);
+      i++;      
     }
   }
   
