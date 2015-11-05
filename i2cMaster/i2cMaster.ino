@@ -16,20 +16,26 @@
  
  */
 
+#define DEBUG
+
 #include <Wire.h>
 uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
 
 void setup() {
   // Start the I2C Bus as Master
   Wire.begin(); //address=null => Im Master on line
-  Serial.begin(9600);  
+
+#ifdef DEBUG 
+  Serial.begin(9600);
+#endif
+
 }
 
 void loop() {
 
   //sendBytesToSlave
   byte dataBytes[] = { 
-    0b11111111, 0b00000000, 0b11110000, 0b00001111         };
+    0b11111111, 0b00000000, 0b11110000, 0b00001111                   };
   uint8_t dataSize = sizeof(dataBytes);
   sendBytesToSlave(addressSlave0, dataBytes, dataSize);
   delay(1000);
@@ -41,13 +47,27 @@ void sendBytesToSlave(uint8_t addressSlave, const byte* dataBytes, size_t dataSi
   byte dataByte;
   Wire.beginTransmission(addressSlave); // 7-bit slave address.
   Wire.write(dataBytes, dataSize);
-  /*for(uint8_t i=0; i < dataSize; i++){
-   dataByte = dataBytes[i];
-   Wire.write(dataByte);  //send 1 byte to slave
-   //Serial.println(dataByte, BIN);
-   } */  
   Wire.endTransmission(); //stop transmitting
+
+#ifdef DEBUG 
+  Serial.print("send bytesArray to slave ");
+  Serial.print(addressSlave, HEX);
+  Serial.print("\r\n");
+  Serial.print("countBytes=");
+  Serial.print(dataSize, DEC);
+  Serial.print("\r\n");
+  for(uint8_t i=0; i < dataSize; i++){
+    dataByte = dataBytes[i];    
+    Serial.println(dataByte, BIN);
+  }
+#endif
+
 }
+
+
+
+
+
 
 
 

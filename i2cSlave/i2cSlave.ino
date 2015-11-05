@@ -9,19 +9,12 @@
 #include <Wire.h>
 uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
 
-#ifdef DEBUG 
-int LED1 = 3;
-int LED2 = 4;
-#endif
-
 void setup() {
   // Start the I2C Bus as Slave on address 9
   Wire.begin(addressSlave0); // 7-bit slave address. Im slave.  
   Wire.onReceive(wireOnReceive_event);
 
-#ifdef DEBUG 
-  pinMode (LED1, OUTPUT);
-  pinMode (LED2, OUTPUT);
+#ifdef DEBUG   
   Serial.begin(9600);
 #endif  
 }
