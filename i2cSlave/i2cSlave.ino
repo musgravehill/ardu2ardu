@@ -3,27 +3,45 @@
  And common ground!
  What about 10k pullups on SDA, SCL? 
  */
+ 
+#define DEBUG 
 
 #include <Wire.h>
 uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
+
+#ifdef DEBUG 
 int LED1 = 3;
 int LED2 = 4;
-int x = 0;
+#endif
+
 void setup() {
-  // Define the LED pin as Output
-  pinMode (LED1, OUTPUT);
-  pinMode (LED2, OUTPUT);
   // Start the I2C Bus as Slave on address 9
   Wire.begin(addressSlave0); // 7-bit slave address. Im slave.  
   Wire.onReceive(wireOnReceive_event);
+
+#ifdef DEBUG 
+  pinMode (LED1, OUTPUT);
+  pinMode (LED2, OUTPUT);
   Serial.begin(9600);
+#endif  
 }
+
 void wireOnReceive_event(int countBytes) {
-  //x = Wire.read();    // read one character from the I2C
-  digitalWrite(LED1, HIGH);      
-  Serial.println(countBytes, DEC);
-  delay(100);
-  digitalWrite(LED1, LOW);
+#ifdef DEBUG 
+  Serial.print("countBytes=");
+  Serial.print(countBytes, DEC);
+  Serial.print("\r\n");
+#endif 
+
+  byte currByte;  
+  while(Wire.available()){
+    currByte = Wire.read(); //read 1 byte
+
+#ifdef DEBUG 
+    Serial.println(currByte, DEC);
+#endif 
+  }
+
 }
 void loop() {    
 
@@ -34,7 +52,7 @@ void blinkLeds(int x){
   if (x == 0) {
     digitalWrite(LED1, HIGH);    
     digitalWrite(LED2, LOW);   
-   delay(100); 
+    delay(100); 
   }
   if (x == 1) {
     digitalWrite(LED1, LOW);    
@@ -49,4 +67,8 @@ void blinkLeds(int x){
     digitalWrite(LED2, LOW);    
   }  
 }
+
+
+
+
 
