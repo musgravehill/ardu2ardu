@@ -17,7 +17,7 @@ void loop() {
   byte dataBytes[] = { slavePinsState };
   uint8_t dataSize = sizeof(dataBytes);
   sendBytesToSlave(addressSlave0, dataBytes, dataSize);
-  delay(100);
+  delay(50);
 }
 
 void sendBytesToSlave(uint8_t addressSlave, const byte* dataBytes, size_t dataSize){
