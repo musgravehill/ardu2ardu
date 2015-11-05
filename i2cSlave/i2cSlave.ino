@@ -7,7 +7,7 @@
 #define DEBUG 
 
 #include <Wire.h>
-uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
+const uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
 
 void setup() {
   // Start the I2C Bus as Slave on address 9

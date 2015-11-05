@@ -5,7 +5,7 @@
  */
 
 #include <Wire.h>
-uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
+const uint8_t addressSlave0 = 0x1A; // 7bit address: max 127_DEC, 1111111_BIN
 const uint8_t ledPin1 = 3; 
 const uint8_t ledPin2 = 4;
 
