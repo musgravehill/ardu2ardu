@@ -13,7 +13,7 @@ void setup() {
 
 void loop() {
   //sendBytesToSlave
-  byte slavePinsState = random(0,3); // 0b00 .. 0b11
+  byte slavePinsState = random(0,4); // 0b00 .. 0b11  //[0..4)
   byte dataBytes[] = { slavePinsState };
   uint8_t dataSize = sizeof(dataBytes);
   sendBytesToSlave(addressSlave0, dataBytes, dataSize);

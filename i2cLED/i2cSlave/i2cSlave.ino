@@ -27,7 +27,16 @@ void wireOnReceive_event(int countBytes) {
     Serial.println(currByte, BIN);
   }
   
+  digitalWrite(ledPin1, LOW);
   digitalWrite(ledPin2, LOW);
+  
+  if(currByte & 0b01){
+    digitalWrite(ledPin1, HIGH);
+  }
+  if(currByte & 0b10){
+    digitalWrite(ledPin2, HIGH);
+  } 
+  
   
 }
 
