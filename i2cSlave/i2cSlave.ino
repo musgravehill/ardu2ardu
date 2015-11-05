@@ -51,9 +51,21 @@ void wireOnRequest_event(){
   buffer[1] = input & 0xff;
   
   /*
+  //send
   input = 10 001 000 11
   input >> 8 = 10
   input & 0xff = input & 11111111 = 001 000 11
+  //receive
+  b0 = 10;
+  b1 = 001 000 11;
+  
+  b0<<8 = 10 0000 0000;
+  
+  b0<<8 | b2 = 
+    10 0000 0000
+         10 0011  
+    -------------
+    10 0010 0011  === input
    */
   
   
