@@ -3,7 +3,7 @@
  And common ground!
  What about 10k pullups on SDA, SCL? 
  */
- 
+
 #define DEBUG 
 
 #include <Wire.h>
@@ -60,6 +60,7 @@ void blinkLeds(int x){
     digitalWrite(LED2, LOW);    
   }  
 }
+
 
 
 
