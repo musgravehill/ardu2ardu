@@ -30,6 +30,8 @@ void wireOnReceive_event(int countBytes) {
   digitalWrite(ledPin1, LOW);
   digitalWrite(ledPin2, LOW);
   
+  // 11 10 01 00 => led2_led1 is 0\1
+  
   if(currByte & 0b01){
     digitalWrite(ledPin1, HIGH);
   }
